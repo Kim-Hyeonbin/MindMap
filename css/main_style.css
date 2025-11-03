@@ -1,0 +1,13 @@
+body {
+  font-family: "Pretendard", sans-serif;
+  background-color: #f9fafc;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 3rem;
+  color: #4b6ee8;
+}
