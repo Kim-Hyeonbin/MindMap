@@ -7,10 +7,6 @@ window.onload = function () {
       return response.json();
     })
     .then((data) => {
-      // 통계 데이터를 따로 저장
-      const statistics = data.statistics;
-      sessionStorage.setItem("statistics", JSON.stringify(statistics));
-
       const container = document.getElementById("test-container");
 
       data.question.forEach((q) => {
@@ -78,7 +74,6 @@ window.onload = function () {
     sessionStorage.setItem("factorScores", JSON.stringify(factorScores));
 
     // 결과 페이지로 이동
-    window.location.href =
-      "https://kim-hyeonbin.github.io/MindMap/results/ipip_result.html";
+    window.location.href = "../results/ipip_result.html";
   });
 };
