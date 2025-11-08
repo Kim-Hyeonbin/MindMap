@@ -74,6 +74,7 @@ window.onload = function () {
     sessionStorage.setItem("factorScores", JSON.stringify(factorScores));
 
     // 결과 페이지로 이동
-    window.location.href = "/results/ipip_result.html";
+    window.location.href =
+      "https://kim-hyeonbin.github.io/MindMap/results/ipip_result.html";
   });
 };
