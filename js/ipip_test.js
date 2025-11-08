@@ -7,6 +7,10 @@ window.onload = function () {
       return response.json();
     })
     .then((data) => {
+      // 통계 데이터를 따로 저장
+      const statistics = data.statistics;
+      sessionStorage.setItem("statistics", JSON.stringify(statistics));
+
       const container = document.getElementById("test-container");
 
       data.question.forEach((q) => {
@@ -70,7 +74,7 @@ window.onload = function () {
 
     console.log(factorScores);
 
-    // 세션 스토리지에 저장
+    // 세션 스토리지에 설문 결과 저장
     sessionStorage.setItem("factorScores", JSON.stringify(factorScores));
 
     // 결과 페이지로 이동
