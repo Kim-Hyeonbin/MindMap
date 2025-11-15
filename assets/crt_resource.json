@@ -5,7 +5,7 @@
     "license": "This test uses paraphrased versions of the original CRT items. The wording has been rewritten to avoid copyright issues, and the dataset is provided for non-commercial, educational use."
   },
 
-  "questions": [
+  "question": [
     {
       "id": 1,
       "name": "Bat and Balls",
