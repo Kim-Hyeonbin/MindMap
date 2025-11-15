@@ -15,7 +15,14 @@ window.onload = function () {
 
         div.innerHTML = `
         <p><strong>${q.id}. ${q.text}</strong></p>
-        <input type="number" class="crt-input" data-id="${q.id}" value ="0"/>
+        <div class="crt-image-box">
+            <img src="../assets/CRT_${q.id}.png" 
+            alt="문항 ${q.id} 이미지" 
+            class="crt-image"/>
+        </div>
+        <div class="crt-input-box">
+            <input type="number" class="crt-input" data-id="${q.id}" value ="0"/>
+        </div>
         `;
         container.appendChild(div);
       });

@@ -48,4 +48,9 @@ window.onload = () => {
         `;
       });
     });
+
+  document.getElementById("btn-home").addEventListener("click", () => {
+    // GitHub Pages 절대경로로 이동
+    window.location.href = "https://kim-hyeonbin.github.io/MindMap/index.html";
+  });
 };
