@@ -75,7 +75,7 @@ window.onload = () => {
   const scores = JSON.parse(data);
   console.log(scores);
 
-  fetch("https://kim-hyeonbin.github.io/MindMap/assets/ipip_questions.json")
+  fetch("https://kim-hyeonbin.github.io/MindMap/assets/ipip_resource.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("통계 데이터를 불러올 수 없습니다.");
