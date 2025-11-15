@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Cognitive Reflection Test (3-Item Version)",
+    "description": "직관적 사고(System 1)와 숙고적 사고(System 2) 성향을 평가하는 3문항 CRT 검사.",
+    "license": "This test uses paraphrased versions of the original CRT items. The wording has been rewritten to avoid copyright issues, and the dataset is provided for non-commercial, educational use."
+  },
+
+  "questions": [
+    {
+      "id": 1,
+      "name": "Bat and Balls",
+      "text": "방망이와 공의 총 가격은 1.10달러이다. 방망이는 공보다 1달러 더 비싸다. 공의 가격은 얼마인가?",
+      "정답": 0.05,
+      "직관적 오답": 0.10,
+      "stats": {
+        "숙고적": 68.9,
+        "직관적": 26.1,
+        "그 외": 5.0
+      }
+    },
+    {
+      "id": 2,
+      "name": "Widgets",
+      "text": "5대의 기계가 5개의 상품을 만드는 데 5분이 걸린다. 100대의 기계가 100개의 상품을 만드는 데 걸리는 시간은 몇 분인가?",
+      "정답": 5,
+      "직관적 오답": 100,
+      "stats": {
+        "숙고적": 61.5,
+        "직관적": 29.4,
+        "그 외": 9.1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Lily Pads",
+      "text": "연못에 있는 연잎은 매일 두 배로 늘어난다. 연잎이 연못을 가득 채우는 데 48일이 걸린다면, 절반을 채우는 데는 며칠 걸릴까?",
+      "정답": 47,
+      "직관적 오답": 24,
+      "stats": {
+        "숙고적": 59.5,
+        "직관적": 25.8,
+        "그 외": 14.7
+      }
+    }
+  ],
+
+  "global_stats": {
+    "정답률": {
+      "0": 17.0,
+      "1": 17.5,
+      "2": 24.3,
+      "3": 41.3
+    }
+  }
+}
