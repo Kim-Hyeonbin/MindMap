@@ -1,10 +1,10 @@
 let ipipBtn = document.querySelector("#btn-ipip");
-let icarBtn = document.querySelector("#btn-icar");
+let crtBtn = document.querySelector("#btn-crt");
 
 ipipBtn.addEventListener("click", () => {
   window.location.href = "tests/ipip_test.html";
 });
 
-icarBtn.addEventListener("click", () => {
+crtBtn.addEventListener("click", () => {
   window.location.href = "tests/crt_test.html";
 });
