@@ -1,5 +1,5 @@
 window.onload = function () {
-  fetch("https://kim-hyeonbin.github.io/MindMap/assets/ipip_resource.json")
+  fetch("../assets/ipip_resource.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("파일을 불러올 수 없습니다.");
