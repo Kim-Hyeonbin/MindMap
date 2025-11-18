@@ -32,7 +32,7 @@ window.onload = function () {
                             <span>전혀 아니다</span>
                             <span>약간 그렇다</span>
                             <span>상당히 그렇다</span>
-                            <span>대부분 그렇다</span>
+                            <span>매우 그렇다</span>
                         </div>
 
                     </div>
