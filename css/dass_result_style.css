@@ -1,0 +1,143 @@
+/* 전체 레이아웃 */
+body {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  margin: 0;
+  background: #f7faf9;
+  color: #174a5b;
+}
+
+/* 헤더 */
+.result-header {
+  text-align: center;
+  padding: 20px 0 12px;
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
+}
+
+/* 컨테이너 */
+.result-container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
+/* 공통 블록 – IPIP factor-block 일관성 유지 */
+.factor-block {
+  background: white;
+  padding: 24px 26px;
+  margin-bottom: 28px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* 타이틀 */
+.factor-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #174a5b;
+  margin-bottom: 6px;
+}
+
+/* 설명 */
+.factor-description {
+  font-size: 17px;
+  color: #456;
+  line-height: 1.45;
+}
+
+/* 퍼센타일 해석 문구 */
+.factor-comment {
+  margin-top: 14px;
+  font-size: 19px;
+  color: #355;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* 점수 정보 */
+.score-info {
+  font-size: 14px;
+  color: #567;
+}
+
+/* 차트 삽입용 공간 */
+.chart-slot {
+  margin: 22px 0 16px;
+  height: 110px;
+  background: #e4f2f1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* 정보 안내 박스*/
+.result-info {
+  margin: 42px auto 20px;
+  background: white;
+  padding: 28px 34px;
+  max-width: 900px;
+
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border-left: 6px solid #3bb4c1;
+}
+
+.result-info p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #355;
+  margin: 0;
+}
+
+.result-info strong {
+  font-weight: 700;
+  color: #174a5b;
+  background: linear-gradient(90deg, #e4f7f5 0%, #d8f6f3 100%);
+  padding: 1px 4px;
+  border-radius: 6px;
+}
+
+/* 홈 버튼 – IPIP와 완전히 동일 */
+#btn-home {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+
+  padding: 12px 22px;
+
+  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s ease;
+
+  z-index: 999;
+}
+
+#btn-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+#btn-home:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+.result-disclaimer {
+  max-width: 860px;
+  margin: 5px auto 0;
+  padding: 20px 26px;
+  background: #eef7f6;
+  border-radius: 14px;
+  border-left: 6px solid #3bb4c1;
+  font-size: 14px;
+  color: #456;
+  line-height: 1.55;
+  text-align: center;
+}
