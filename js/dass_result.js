@@ -1,14 +1,14 @@
-// 정규분포 CDF (퍼센타일 계산용)
+// 백분율 정규화
 function erf(x) {
   const sign = x >= 0 ? 1 : -1;
   x = Math.abs(x);
 
-  const a1 = 0.254829592;
-  const a2 = -0.284496736;
-  const a3 = 1.421413741;
-  const a4 = -1.453152027;
-  const a5 = 1.061405429;
-  const p = 0.3275911;
+  const a1 = 0.254829592,
+    a2 = -0.284496736,
+    a3 = 1.421413741;
+  const a4 = -1.453152027,
+    a5 = 1.061405429,
+    p = 0.3275911;
 
   const t = 1 / (1 + p * x);
   const y =
@@ -21,89 +21,116 @@ function normalCDF(z) {
   return (1 + erf(z / Math.sqrt(2))) / 2;
 }
 
+// 조언 템플릿
+const advice = {
+  D: {
+    낮음: "정서 에너지가 안정적인 흐름입니다. 일상에서 작은 즐거움을 더 붙여보세요.",
+    "약간 낮음":
+      "균형 잡힌 정도의 기분 상태입니다. 흥미로운 일을 조금 늘려보는 것도 좋습니다.",
+    보통: "자연스러운 범위의 기복입니다. 부담 없는 활동 하나를 꾸준히 유지해보세요.",
+    "약간 높음":
+      "무기력감이 찾아올 수 있습니다. 아주 작은 성취부터 쌓아도 충분합니다.",
+    높음: "정서 에너지가 낮아진 시기입니다. 짧은 산책이나 햇빛 등 가벼운 자극이 도움이 됩니다.",
+  },
+  A: {
+    낮음: "차분하고 안정적인 흐름입니다. 지금의 리듬을 유지하는 것이 가장 좋습니다.",
+    "약간 낮음":
+      "긴장도가 낮아 여유가 있는 편입니다. 작은 변화에도 잘 적응할 수 있습니다.",
+    보통: "신경이 예민해질 수 있는 정도입니다. 불필요한 자극을 조금만 줄여보세요.",
+    "약간 높음":
+      "예상치 못한 상황에서 긴장이 생길 수 있습니다. 호흡을 천천히 길게 가져가면 좋습니다.",
+    높음: "과각성이 유지될 수 있습니다. 해야 할 일을 작게 나누면 부담이 빠르게 줄어듭니다.",
+  },
+  S: {
+    낮음: "스트레스 반응이 낮은 편입니다. 지금의 페이스를 자연스럽게 이어가면 좋습니다.",
+    "약간 낮음":
+      "기본적인 긴장도가 낮은 흐름입니다. 작업·휴식 균형을 유지하세요.",
+    보통: "부담을 느끼는 순간이 있지만 자연스러운 범위입니다. 휴식 구간을 명확히 두면 좋습니다.",
+    "약간 높음":
+      "압박을 쉽게 느낄 수 있습니다. 업무를 작은 단위의 덩어리로 나누면 도움이 됩니다.",
+    높음: "긴장도가 높아질 수 있는 시기입니다. 3분 정도의 짧은 멈춤 루틴이 효과적입니다.",
+  },
+};
+
+//  main
 window.onload = () => {
   const data = sessionStorage.getItem("scaleScores");
   const container = document.getElementById("result-container");
 
   if (!data) {
-    container.innerHTML =
-      "<p>검사 결과가 없습니다. 다시 검사를 진행해주세요.</p>";
+    container.innerHTML = "<p>결과가 없습니다.</p>";
     return;
   }
 
   const scores = JSON.parse(data);
 
-  // DASS 통계(JSON) 불러오기
   fetch("../assets/dass_resource.json")
     .then((res) => res.json())
-    .then((stats) => {
-      // DASS 통계 객체은 JSON의 `statistics`에 들어있음
-      const s = stats.statistics;
+    .then((json) => {
+      const stat = json.statistics;
 
-      // Z-score 계산
-      const zScores = {
-        D: (scores.D - s.D.mean) / s.D.sd,
-        A: (scores.A - s.A.mean) / s.A.sd,
-        S: (scores.S - s.S.mean) / s.S.sd,
+      const z = {
+        D: (scores.D - stat.D.mean) / stat.D.sd,
+        A: (scores.A - stat.A.mean) / stat.A.sd,
+        S: (scores.S - stat.S.mean) / stat.S.sd,
       };
 
-      // 제목 + 설명
-      const titles = {
-        D: "우울(Depression)",
-        A: "불안(Anxiety)",
-        S: "스트레스(Stress)",
+      const title = {
+        D: "우울 (Depression)",
+        A: "불안 (Anxiety)",
+        S: "스트레스 (Stress)",
       };
 
-      const descriptions = {
-        D: "우울은 무기력감·슬픔·흥미 상실 등 정서적 저하 상태를 나타냅니다.",
-        A: "불안은 위험·위협을 예상하는 심리적 경향과 신체적 흥분 수준을 의미합니다.",
-        S: "스트레스는 긴장, 과부하, 압박감에 대한 반응 강도를 나타냅니다.",
+      const desc = {
+        D: "우울은 무기력감·슬픔·흥미 상실 등 정서적 저하를 나타냅니다.",
+        A: "불안은 예측적 긴장·과각성·위협 민감성을 반영합니다.",
+        S: "스트레스는 과부하·압박·긴장 경험의 강도를 의미합니다.",
       };
 
-      for (let key of ["D", "A", "S"]) {
-        const mean = s[key].mean;
-        const sd = s[key].sd;
+      ["D", "A", "S"].forEach((key) => {
+        const mean = stat[key].mean;
         const raw = scores[key];
 
-        // 퍼센타일
-        const percentile = normalCDF(zScores[key]) * 100;
+        const pct = normalCDF(z[key]) * 100;
 
-        // 레벨 판정
         let level = "";
-        if (percentile < 16) level = "낮음";
-        else if (percentile < 33) level = "약간 낮음";
-        else if (percentile < 66) level = "보통";
-        else if (percentile < 83) level = "약간 높음";
+        if (pct < 16) level = "낮음";
+        else if (pct < 33) level = "약간 낮음";
+        else if (pct < 66) level = "보통";
+        else if (pct < 83) level = "약간 높음";
         else level = "높음";
 
-        // UI 생성
-        const div = document.createElement("div");
-        div.className = "factor-block";
+        // 결과 고지 블록
+        const block = document.createElement("div");
+        block.className = "factor-block";
 
-        div.innerHTML = `
-          <div class="factor-header">
-            <div class="factor-title">${titles[key]}</div>
-            <div class="factor-description">${descriptions[key]}</div>
-          </div>
+        block.innerHTML = `
+          <div class="factor-title">${title[key]}</div>
+          <div class="factor-description">${desc[key]}</div>
 
           <div class="factor-comment">
-            당신의 위치는 <b>${percentile.toFixed(
+            당신의 위치는 <b>${pct.toFixed(
               1
             )}%</b> — <b>${level}</b> 수준입니다.
           </div>
 
-          <p class="score-info" style="margin-top:10px; font-size:14px;">
-            내 점수: ${raw} 점<br>
-            집단 평균: ${mean.toFixed(1)} 점
+          <div class="chart-slot" id="chart-${key}"></div>
+
+          <p class="score-info">
+            내 점수: ${raw}점<br>
+            집단 평균: ${mean.toFixed(1)}점
           </p>
+
+          <div class="advice">
+            ${advice[key][level]}
+          </div>
         `;
 
-        container.appendChild(div);
-      }
+        container.appendChild(block);
+      });
     });
 
-  // 홈 버튼
-  document.getElementById("btn-home").addEventListener("click", () => {
-    window.location.href = "https://kim-hyeonbin.github.io/MindMap/index.html";
-  });
+  document.getElementById("btn-home").onclick = () => {
+    window.location.href = "../index.html";
+  };
 };
