@@ -1,0 +1,100 @@
+/*  전체 설정  */
+body {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  background-color: #f7faf9;
+  color: #174a5b;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/*  제목  */
+h1 {
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 1.8rem;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*  검사 컨테이너  */
+#test-container {
+  max-width: 780px;
+  background-color: #ffffff;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 각 문항 */
+.question {
+  border-bottom: 1px solid #e3efee;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.question:last-child {
+  border-bottom: none;
+}
+
+.question p {
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: #164b5a;
+}
+
+/* 선택지(라디오 버튼) 직선 배치 */
+.options {
+  display: flex;
+  justify-content: space-between; /* 각 항목을 균등 간격으로 배치 */
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+}
+
+.options label {
+  flex: 1; /* 동일한 폭으로 나열 */
+  background-color: #e7f7f6;
+  border-radius: 25px;
+  padding: 0.6rem 0.4rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.options input[type="radio"] {
+  margin-right: 4px;
+}
+
+.options label:hover {
+  background-color: #c3eeeb;
+}
+
+/* 버튼  */
+#submit-btn {
+  display: block;
+  margin: 2rem auto 1rem auto;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+  background-color: #40e0d0;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#submit-btn:hover {
+  background-color: #2fbdb3;
+  transform: translateY(-2px);
+}
+
+#submit-btn:active {
+  transform: scale(0.97);
+}
