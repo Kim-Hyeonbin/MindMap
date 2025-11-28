@@ -1,0 +1,102 @@
+/* 공통 폰트 + 레이아웃 */
+body {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f7faf9;
+  color: #174a5b;
+  text-align: center;
+}
+
+h1,
+h2,
+h3 {
+  color: #174a5b;
+  margin-bottom: 1rem;
+}
+
+/* 문항 전체 컨테이너 */
+#test-container,
+#result-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* 문항 카드 */
+.question,
+.result-item {
+  background: white;
+  padding: 16px 20px;
+  margin: 15px 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0f2f1;
+}
+
+/* 문항 텍스트 */
+.question p strong {
+  font-size: 20px;
+  color: #0b3d4f;
+}
+
+/* 숫자 입력창 */
+.crt-input {
+  width: 200px;
+  height: 50px;
+  padding: 8px 12px;
+  margin-top: 13px;
+  font-size: 30px;
+  border: 2px solid #bbe5e1;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.crt-input:focus {
+  border-color: #40e0d0;
+  box-shadow: 0 0 8px rgba(64, 224, 208, 0.3);
+}
+
+/* 이미지 중앙 정렬 */
+.crt-image-box {
+  width: 100%;
+  text-align: center;
+  margin: 30px 30px;
+}
+
+.crt-image {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+}
+
+/* 입력 칸은 왼쪽 정렬 */
+.crt-input-box {
+  text-align: left;
+  margin-top: 8px;
+}
+
+/* 버튼  */
+#submit-btn {
+  display: block;
+  margin: 2rem auto 1rem auto;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+  background-color: #40e0d0;
+  color: #ffffff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#submit-btn:hover {
+  background-color: #2fbdb3;
+  transform: translateY(-2px);
+}
+
+#submit-btn:active {
+  transform: scale(0.97);
+}
