@@ -1,0 +1,132 @@
+.factor-block {
+  background: white;
+  padding: 20px;
+  margin-bottom: 28px;
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* 요인 이름 */
+.factor-title {
+  width: 30%;
+  font-size: 30px;
+  font-weight: 700;
+  color: #174a5b;
+}
+
+/* 요인 설명 */
+.factor-description {
+  width: 50%;
+  font-size: 22px;
+  color: #567;
+  line-height: 1.4;
+}
+
+/* 레벨 별 설명 */
+.factor-comment {
+  margin-top: 12px;
+  font-size: 23px;
+  line-height: 1.45;
+  color: #355;
+  padding-bottom: 25px;
+}
+
+/* 퍼센트 바 */
+.bar-wrapper {
+  width: 100%;
+  height: 12px;
+  background: #e4f2f1;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 8px 0 4px 0;
+}
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
+  transition: width 0.8s ease;
+}
+.percent-label {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* 점수 비교 선 */
+.score-line {
+  position: relative;
+  width: 100%;
+  height: 26px;
+  margin-top: 10px;
+}
+.score-line .line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 5px;
+  background: #dcebea;
+  transform: translateY(-50%);
+  border-radius: 4px;
+}
+.score-dot {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.my-score-dot {
+  background: #3bb4c1;
+}
+.mean-score-dot {
+  background: #174a5b;
+}
+
+.score-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: 4px;
+  color: #567;
+}
+
+#btn-home {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+
+  padding: 12px 22px;
+
+  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: all 0.25s ease;
+
+  z-index: 999; /* 다른 요소 위로 띄우기 */
+}
+
+#btn-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+#btn-home:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}
+
+#btn-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+#btn-home:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+}

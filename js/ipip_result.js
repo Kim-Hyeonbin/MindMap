@@ -78,7 +78,7 @@ window.onload = () => {
   const scores = JSON.parse(data);
   console.log(scores);
 
-  fetch("https://kim-hyeonbin.github.io/MindMap/assets/ipip_resource.json")
+  fetch("../assets/ipip_resource.json")
     .then((response) => {
       if (!response.ok) {
         throw new Error("통계 데이터를 불러올 수 없습니다.");
@@ -147,20 +147,35 @@ window.onload = () => {
 
         // HTML 구성
         div.innerHTML = `
-          <div class="factor-header">
-            <div class="factor-title">${key}</div>
-            <div class="factor-description">${factorDescriptions[key]}</div>
-          </div>
-
+          <div class="factor-title">${key}</div>
+          <div class="factor-description">${factorDescriptions[key]}</div>
           <div class="factor-comment">당신은 ${comment}</div>
 
-          <div class="percent-label" style="margin-top:10px;">
+          <div class="percent-label">
             percentile: ${percentile.toFixed(1)}% — ${level}
           </div>
 
-          <p class="score-info" style="margin-top:10px; font-size:14px;">
-            내 점수: ${yourScore.toFixed(2)} / 5<br>
-            평균 점수: ${meanScore.toFixed(2)} / 5
+          <!-- 퍼센타일 progress bar -->
+          <div class="bar-wrapper">
+            <div class="bar-fill" style="width:${percentile.toFixed(
+              1
+            )}%;"></div>
+          </div>
+
+          <!-- 점수 비교 -->
+          <div class="score-line">
+            <div class="line"></div>
+            <div class="score-dot my-score-dot" style="left:${yourPos}%;"></div>
+            <div class="score-dot mean-score-dot" style="left:${meanPos}%;"></div>
+          </div>
+
+          <div class="score-labels">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          </div>
+
+          <p style="margin-top:10px; font-size:14px;">
+            내 점수 (푸른 점): ${yourScore.toFixed(2)} / 5<br>
+            평균 점수 (어두운 점): ${meanScore.toFixed(2)} / 5
           </p>
         `;
 
@@ -169,7 +184,6 @@ window.onload = () => {
     });
 
   document.getElementById("btn-home").addEventListener("click", () => {
-    // GitHub Pages 절대경로로 이동
-    window.location.href = "https://kim-hyeonbin.github.io/MindMap/index.html";
+    window.location.href = "../index.html";
   });
 };
