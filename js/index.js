@@ -3,7 +3,7 @@ let crtBtn = document.querySelector("#btn-crt");
 let dassBtn = document.querySelector("#btn-dass");
 
 ipipBtn.addEventListener("click", () => {
-  window.location.href = "tests/ipip_test.html";
+  window.location.href = "descriptions/ipip_description.html";
 });
 
 crtBtn.addEventListener("click", () => {

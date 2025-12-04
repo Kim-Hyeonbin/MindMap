@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MindMap | IPIP Big Five 성격 검사 안내</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/description_style.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <img src="../assets/main_logo.png" alt="MindMap 로고" class="logo" />
+      <p class="subtitle">오픈소스 기반 성격 및 지능 검사 플랫폼</p>
+    </header>
+
+    <main>
+      <h1>IPIP Big Five 성격 검사 안내</h1>
+      <p class="small-label">
+        이 페이지는 IPIP 성격 검사를 시작하기 전에 간단한 설명을 제공하는 안내
+        화면입니다.
+      </p>
+
+      <section>
+        <h2>🧩 어떤 검사인가요?</h2>
+        <p>
+          IPIP(International Personality Item Pool), 그 중 Big Five 검사는 인간의 성격을
+          <span class="highlight">다섯 가지 핵심 요인</span>으로 이해하는
+          대표적인 성격 모델입니다.
+        </p>
+        <p>
+          MindMap에서는 이 검사를 통해 개인의 성향을
+          <span class="highlight">간결하고 이해하기 쉬운 형태</span>로
+          보여줍니다.
+        </p>
+        <ul>
+          <li>외향성</li>
+          <li>원만성/호감성</li>
+          <li>성실성</li>
+          <li>정서적 안정성</li>
+          <li>지성/상상력(개방성)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📋 검사 구성과 소요 시간</h2>
+        <p>· 총 <span class="highlight">50문항</span>으로 구성되어 있습니다.</p>
+        <p>· 각 문항은 1~5점 척도로 응답합니다.</p>
+        <p>
+          · 예상 소요 시간은 약 <span class="highlight">5~10분</span>입니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>📊 결과는 어떻게 보여주나요?</h2>
+        <p>검사 완료 후, MindMap은 다음과 같은 정보를 제공합니다.</p>
+        <ul>
+          <li>각 요인별 백분위 및 성향 수준</li>
+          <li>내 점수와 전체 평균 점수 비교</li>
+          <li>요인별 간단한 해석 코멘트</li>
+        </ul>
+        <p>
+          진단이 아닌 <span class="highlight">자기 이해와 성찰</span>을 돕기
+          위한 용도로 설계되어 있습니다.
+        </p>
+        <p>
+          본 페이지의 성향 해석과 요인 설명은 생성형 AI를 활용해 작성된 것으로, </br>
+          학술적 정확성을 보장하지 않으며 참고용 안내에 그 목적이 있습니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>⚠ 응답 시 유의사항</h2>
+        <p>· 이 검사는 정답·오답을 가리지 않습니다.</p>
+        <p>
+          · “이상적인 나”가 아니라, <span class="highlight">평소의 나</span>에
+          가깝게 응답할수록 결과가 더 의미 있어집니다.
+        </p>
+        <p>
+          · 본 검사는 임상 진단을 위한 도구가 아니며, 심리적 치료나 상담을
+          대체하지 않습니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>📚 출처 및 라이선스</h2>
+        <p>
+          IPIP(Big Five) 검사는 다양한 오픈소스로서, 자유롭게 수정이 가능한
+          검사입니다. </br></br>
+          IPIP(Big Five) 검사는 3000개 이상의 다양한 버전이 존재하며, 본 검사는 가장
+          기본적인 버전 중 하나인 </br>
+          <span class="highlight"
+            >50-item IPIP version of the Big Five Markers</span
+          >
+          문항을 기반으로 합니다. </br></br>
+          각 문항은 오인수님의 "IPIP Big-Five factor markers
+          100문항 번역"을 참조했으며, </br>
+          퍼블릭 도메인 정책에 따라 비상업적 용도로 사용되고 있습니다.</br>
+          </br>
+          또한 각 결과 해석은 Kaggle의 Big Five Personality Test 데이터셋을 기반으로 산출되었음을 알립니다.
+        </p>
+      </section>
+
+      <div class="button-row">
+        <button id="btn-start" class="btn-primary">
+          🚀 IPIP 성격 검사 시작하기
+        </button>
+
+        <button id="btn-home" class="btn-secondary">⬅ 홈으로 돌아가기</button>
+      </div>
+    </main>
+
+    <script>
+      document.getElementById("btn-start").addEventListener("click", () => {
+        window.location.href =
+          "../tests/ipip_test.html";
+      });
+
+      document.getElementById("btn-home").addEventListener("click", () => {
+        window.location.href =
+          "../index.html";
+      });
+    </script>
+  </body>
+</html>
