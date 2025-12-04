@@ -1,0 +1,134 @@
+body {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  margin: 0;
+  background-color: #f7faf9;
+  color: #174a5b;
+}
+
+.main-header {
+  padding: 1.2rem 1rem 0.7rem 1rem;
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
+  text-align: center;
+}
+
+.main-header .logo {
+  height: 56px;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.8rem 1.4rem 4rem 1.4rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.small-label {
+  font-size: 0.9rem;
+  color: #567;
+  margin-bottom: 1.4rem;
+}
+
+section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.3rem 1.4rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+section h2 {
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+section p {
+  margin: 0.2rem 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+ul {
+  margin: 0.4rem 0 0.2rem 1.1rem;
+  padding: 0;
+  font-size: 0.95rem;
+}
+
+li {
+  margin-bottom: 0.2rem;
+}
+
+.highlight {
+  font-weight: 600;
+  color: #136276;
+}
+
+.button-row {
+  margin-top: 1.8rem;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+  border: none;
+  border-radius: 14px;
+  padding: 0.75rem 1.3rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.btn-secondary {
+  background: #e4f2f1;
+  color: #174a5b;
+}
+
+.btn-secondary:hover {
+  background: #d3e7e5;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 1.4rem 1rem 3rem 1rem;
+  }
+
+  section {
+    padding: 1.1rem 1.1rem;
+  }
+
+  .button-row {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    text-align: center;
+  }
+}
