@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MindMap | DASS 정서 상태 검사 안내</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/description_style.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <img src="../assets/main_logo.png" alt="MindMap 로고" class="logo" />
+      <p class="subtitle">오픈소스 기반 성격 및 정서 검사 플랫폼</p>
+    </header>
+
+    <main>
+      <h1>DASS 정서 상태 검사 안내</h1>
+      <p class="small-label">
+        이 페이지는 DASS 정서 검사를 시작하기 전에 간단한 설명을 제공하는 안내
+        화면입니다.
+      </p>
+
+      <section>
+        <h2>🧑‍⚕️ 어떤 검사인가요?</h2>
+        <p>
+          <span class="highlight">DASS(Depression Anxiety Stress Scales)</span>
+          검사는 <br />
+          다음 세 가지 척도를 통해 현재 정서 상태를 이해하는 모델입니다.
+        </p>
+        <p>
+          <ul>
+            <li>우울 (Depression)</li>
+            <li>불안 (Anxiety)</li>
+            <li>스트레스 (Stress)</li>
+          </ul>
+        </p>
+      </section>
+
+      <section>
+        <h2>📋 검사 구성과 소요 시간</h2>
+        <p>· 총 <span class="highlight">42문항</span>으로 구성되어 있습니다.</p>
+        <p>· 각 문항은 "전혀 아니다", "약간 그렇다", "상당히 그렇다", "매우 그렇다"의 네 단계로 응답합니다.</p>
+        <p>
+          · 예상 소요 시간은 약 <span class="highlight">5~10분</span>입니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>📊 결과는 어떻게 활용하나요?</h2>
+        <p>
+          본 검사에서 사용되는 평균·표준편차·백분위 기준은
+          <span class="highlight">OpenPsychometrics.org</span>에서 <br />
+          제공된 대규모 온라인 DASS 설문 응답(2017~2019)을 기반으로 합니다. <br />
+          주로 영어권 사용자들의 응답이 포함된 자료이기 때문에, <br />
+          결과 해석은 특정 문화나 연령, 임상군을 반영하지 <br />
+          않으며 한국 문화권과는 다소 차이가 있을 수 있습니다.
+        </p>
+        <p> <br />
+            또한 본 결과는 임상적 지침이나 전문 매뉴얼을 근거로 하지 않으며, <br />
+            <strong>단순한 백분율 산출에 기반한 해석이므로 절대적 판단으로 받아들이기에는 무리가 있습니다.</strong><br />
+            어디까지나 스스로를 돌아보는 참고용 지표로 삼는 편이 더 적절합니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>⚠ 응답 시 유의사항</h2>
+        <p>
+          응답할 때는 <strong>최대한 직관적으로, 빠르게 응답</strong>하는 것이 검사의 정확도를 높일 수 있습니다.<br /><br />
+        </p>
+        <p>
+          MindMap은 이 검사를
+          <span class="highlight">정밀한 임상 진단 도구가 아니라</span><br />
+          정서 흐름을 가볍게 점검하는 목적에 맞게 제공합니다.
+        </p>
+        <p>
+        <br />
+          결과가 다소 낯설게 느껴지더라도 너무 심각하게 받아들이지 않으셔도
+          좋습니다.<br />
+          필요하다면 전문 상담가나 임상 전문가의 조언을 받는 것이 가장
+          바람직합니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>📚 출처 및 라이선스</h2>
+        <p>
+          DASS(Depression Anxiety Stress Scales)는 퍼블릭 도메인으로 공개된 정서 평가 척도이며, <br />
+          본 페이지는 공개 문항과 통계 자료를 기반으로 제작된 비상업적 안내 페이지입니다.
+        </p>
+        <p><br />
+          한국어 번역은 KeouWon Lee님이 공개한 버전을 기반으로 하며,<br /> 
+          결과 해석에 사용된 데이터셋은 OpenPsychometrics에서 공개한 자료를 바탕으로 합니다.</p>
+        
+      </section>
+
+      <div class="button-row">
+        <button id="btn-start" class="btn-primary">
+          🚀 DASS 검사 시작하기
+        </button>
+        <button id="btn-home" class="btn-secondary">⬅ 홈으로 돌아가기</button>
+      </div>
+    </main>
+
+    <script>
+      document.getElementById("btn-start").addEventListener("click", () => {
+        window.location.href = "../tests/dass_test.html";
+      });
+
+      document.getElementById("btn-home").addEventListener("click", () => {
+        window.location.href =
+          "../index.html";
+      });
+    </script>
+  </body>
+</html>

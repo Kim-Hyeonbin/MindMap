@@ -11,5 +11,5 @@ crtBtn.addEventListener("click", () => {
 });
 
 dassBtn.addEventListener("click", () => {
-  window.location.href = "tests/dass_test.html";
+  window.location.href = "descriptions/dass_description.html";
 });
