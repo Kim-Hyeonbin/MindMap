@@ -109,7 +109,7 @@ window.onload = () => {
       const factorDescriptions = {
         외향성: "외향성은 사회적 상호작용에서 에너지를 얻는 정도를 나타냅니다.",
         "원만성/호감성":
-          "원만성은 타인을 배려하고 조화롭게 관계를 유지하려는 성향을 의미합니다.",
+          "원만성/호감성은 타인을 배려하고 조화롭게 관계를 유지하려는 성향을 의미합니다.",
         성실성:
           "성실성은 계획성·책임감·규칙 준수 등 자기 관리 능력을 나타냅니다.",
         "정서적 안정성":
@@ -125,15 +125,15 @@ window.onload = () => {
         const div = document.createElement("div");
         div.className = "factor-block";
 
-        // 퍼센타일 계산
+        // 퍼센트 계산
         let percentile = normalCDF(zScores[key]) * 100;
 
         // 레벨 판정
         let level = "";
-        if (percentile < 16) level = "낮음";
-        else if (percentile < 33) level = "약간 낮음";
-        else if (percentile < 66) level = "보통";
-        else if (percentile < 83) level = "약간 높음";
+        if (percentile < 20) level = "낮음";
+        else if (percentile < 45) level = "약간 낮음";
+        else if (percentile < 55) level = "보통";
+        else if (percentile < 80) level = "약간 높음";
         else level = "높음";
 
         // 레벨 별 코멘트
@@ -145,43 +145,117 @@ window.onload = () => {
         const yourPos = (yourScore / 5) * 100;
         const meanPos = (meanScore / 5) * 100;
 
-        // HTML 구성
+        // HTML + 차트 구성
         div.innerHTML = `
-          <div class="factor-title">${key}</div>
-          <div class="factor-description">${factorDescriptions[key]}</div>
-          <div class="factor-comment">당신은 ${comment}</div>
+        <div class="factor-title">${key}: ${level}</div>
+        <div class="factor-description">${factorDescriptions[key]}</div>
+        <div class="factor-comment">당신은 ${comment}</div>
 
-          <div class="percent-label">
-            percentile: ${percentile.toFixed(1)}% — ${level}
-          </div>
+        <!-- 퍼센타일 차트 자리 -->
+        <div class="chart-block">
+          <div class="chart-title">백분위 위치 (상위 ${percentile.toFixed(
+            1
+          )}%)</div>
+          <div class="percentile-chart" id="pct-${key}"></div>
+        </div>
 
-          <!-- 퍼센타일 progress bar -->
-          <div class="bar-wrapper">
-            <div class="bar-fill" style="width:${percentile.toFixed(
-              1
-            )}%;"></div>
-          </div>
+        <!-- 점수 비교 차트 자리 -->
+        <div class="chart-block">
+          <div class="chart-title">점수 비교</div>
+          <div class="score-chart" id="score-${key}"></div>
+        </div>
 
-          <!-- 점수 비교 -->
-          <div class="score-line">
-            <div class="line"></div>
-            <div class="score-dot my-score-dot" style="left:${yourPos}%;"></div>
-            <div class="score-dot mean-score-dot" style="left:${meanPos}%;"></div>
-          </div>
-
-          <div class="score-labels">
-            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-          </div>
-
-          <p style="margin-top:10px; font-size:14px;">
-            내 점수 (푸른 점): ${yourScore.toFixed(2)} / 5<br>
-            평균 점수 (어두운 점): ${meanScore.toFixed(2)} / 5
-          </p>
-        `;
+        <p class="score-info">
+          내 점수 (푸른 점): ${yourScore.toFixed(2)} / 5<br>
+          평균 점수 (어두운 점): ${meanScore.toFixed(2)} / 5
+        </p>
+      `;
 
         container.appendChild(div);
+        // 애니메이션 차트 호출
+        drawPercentileChart(`pct-${key}`, percentile);
+        drawScoreChart(`score-${key}`, yourPos, meanPos);
       }
     });
+
+  //  퍼센트 가로 바 애니메이션
+
+  function drawPercentileChart(id, percentile) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // fill element
+    const fill = document.createElement("div");
+    fill.style.position = "absolute";
+    fill.style.left = "0";
+    fill.style.top = "0";
+    fill.style.height = "100%";
+    fill.style.width = "0%";
+    fill.style.borderRadius = "12px";
+    fill.style.background = "linear-gradient(90deg, #3bb4c1, #40e0d0)";
+    fill.style.transition = "width 1.1s cubic-bezier(.19,1,.22,1)";
+
+    el.appendChild(fill);
+
+    // 애니메이션 시작 (렌더링 이후 실행)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        fill.style.width = `${percentile}%`;
+      });
+    });
+  }
+
+  function drawScoreChart(id, userPos, meanPos) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    // 기준선
+    const line = document.createElement("div");
+    line.style.position = "absolute";
+    line.style.left = "0";
+    line.style.top = "50%";
+    line.style.transform = "translateY(-50%)";
+    line.style.height = "6px";
+    line.style.width = "100%";
+    line.style.background = "#dcebea";
+    line.style.borderRadius = "4px";
+    el.appendChild(line);
+
+    // 사용자 점
+    const userDot = document.createElement("div");
+    userDot.style.position = "absolute";
+    userDot.style.top = "50%";
+    userDot.style.width = "14px";
+    userDot.style.height = "14px";
+    userDot.style.borderRadius = "50%";
+    userDot.style.background = "#3bb4c1";
+    userDot.style.transform = "translate(-50%, -50%)";
+    userDot.style.left = "0%";
+    userDot.style.transition = "left 1.1s cubic-bezier(.19,1,.22,1)";
+    el.appendChild(userDot);
+
+    // 평균 점
+    const meanDot = document.createElement("div");
+    meanDot.style.position = "absolute";
+    meanDot.style.top = "50%";
+    meanDot.style.width = "14px";
+    meanDot.style.height = "14px";
+    meanDot.style.borderRadius = "50%";
+    meanDot.style.background = "#174a5b";
+    meanDot.style.transform = "translate(-50%, -50%)";
+    meanDot.style.left = "0%";
+    meanDot.style.transition = "left 1.1s cubic-bezier(.19,1,.22,1)";
+    meanDot.style.transitionDelay = "0.1s"; // 살짝 늦게 출발
+    el.appendChild(meanDot);
+
+    // 애니메이션 실제 시작 (렌더링 안정화 후)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        userDot.style.left = `${userPos}%`;
+        meanDot.style.left = `${meanPos}%`;
+      });
+    });
+  }
 
   document.getElementById("btn-home").addEventListener("click", () => {
     window.location.href = "../index.html";
