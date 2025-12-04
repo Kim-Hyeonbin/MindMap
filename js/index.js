@@ -7,7 +7,7 @@ ipipBtn.addEventListener("click", () => {
 });
 
 crtBtn.addEventListener("click", () => {
-  window.location.href = "tests/crt_test.html";
+  window.location.href = "descriptions/crt_description.html";
 });
 
 dassBtn.addEventListener("click", () => {
