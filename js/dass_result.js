@@ -1,3 +1,20 @@
+function animateBarValues(chart, targetData, duration = 900) {
+  let start = null;
+
+  function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+
+    // 단일 dataset만 사용하므로 index 0
+    chart.data.datasets[0].data = targetData.map((v) => v * p);
+    chart.update();
+
+    if (p < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
 // 백분율 정규화
 function erf(x) {
   const sign = x >= 0 ? 1 : -1;
@@ -109,9 +126,7 @@ window.onload = () => {
           <div class="factor-description">${desc[key]}</div>
 
           <div class="factor-comment">
-            당신의 위치는 <b>${pct.toFixed(
-              1
-            )}%</b> — <b>${level}</b> 수준입니다.
+            당신의 위치는 <b>${pct.toFixed(1)}%</b> — <b>${level}</b>
           </div>
 
           <div class="chart-slot" id="chart-${key}"></div>
@@ -127,6 +142,65 @@ window.onload = () => {
         `;
 
         container.appendChild(block);
+        // 차트 슬롯에서 canvas 생성
+        const slot = block.querySelector(`#chart-${key}`);
+        const canvas = document.createElement("canvas");
+        canvas.id = `chart-canvas-${key}`;
+        slot.appendChild(canvas);
+
+        const ctx = canvas.getContext("2d");
+
+        const dassChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["사용자", "평균"],
+            datasets: [
+              {
+                label: title[key],
+                data: [0, 0],
+                backgroundColor: [
+                  "rgba(64, 224, 208, 0.88)", // 사용자
+                  "rgba(255, 206, 86, 0.75)", // 평균
+                ],
+                borderColor: ["rgba(23, 74, 91, 1)", "rgba(210, 170, 60, 1)"],
+                borderWidth: 1.8,
+                borderRadius: 10,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            animation: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 42, // y축 최댓값 고정 (42점)
+                ticks: { stepSize: 7 },
+              },
+            },
+          },
+        });
+
+        // 막대 애니메이션
+        function animateSingleChart(chart, targetData, duration = 1200) {
+          let start = null;
+
+          function step(ts) {
+            if (!start) start = ts;
+            const p = Math.min((ts - start) / duration, 1);
+
+            chart.data.datasets[0].data = targetData.map((v) => v * p);
+            chart.update();
+
+            if (p < 1) requestAnimationFrame(step);
+          }
+
+          requestAnimationFrame(step);
+        }
+
+        animateSingleChart(dassChart, [raw, mean]);
       });
     });
 
