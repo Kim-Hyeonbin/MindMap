@@ -7,7 +7,12 @@ body {
   color: #174a5b;
 }
 
-/* 제목 */
+.about {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 22px;
+}
+
 h2,
 h3 {
   margin: 0 0 16px 0;
@@ -15,7 +20,6 @@ h3 {
   font-weight: 700;
 }
 
-/* 큰 블록 – Big Five의 factor-block 대응 */
 .result-block {
   background: white;
   padding: 24px 26px;
@@ -23,101 +27,104 @@ h3 {
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
+/* 결과 전체 컨테이너 */
+.result-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 22px;
+}
 
-/* 사고 유형 제목 */
 .thinker-type {
   font-size: 26px;
   font-weight: 700;
-  color: #174a5b;
   margin-bottom: 12px;
 }
 
-/* 사고 유형 설명 */
 .thinker-desc {
   font-size: 19px;
   color: #355;
   line-height: 1.45;
-  margin-bottom: 16px;
 }
 
-/* 전체 분포 */
-.distribution-text {
-  font-size: 17px;
-  line-height: 1.5;
-  color: #355;
+/* 파이 차트 컨테이너 */
+.pie-chart {
+  width: 180px;
+  height: 180px;
+  margin: 18px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  transform: rotate(-90deg);
+  animation: sweep 1.2s ease-out;
 }
 
-/* 문항 결과 개별 카드 */
-.result-item {
-  background: #ffffff;
-  padding: 20px 22px;
-  margin: 16px 0;
-  border-radius: 12px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
-  border-left: 6px solid #3bb4c1; /* 시그니처 라인 */
-}
-
-/* 문항 텍스트 */
-.result-item strong {
+/* 파이차트 중앙 라벨 */
+.pie-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
   font-size: 18px;
+  font-weight: 700;
   color: #174a5b;
 }
 
-/* 평가 텍스트 */
+@keyframes sweep {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.result-item {
+  background: white;
+  padding: 20px 22px;
+  margin: 16px 0;
+  border-radius: 12px;
+  border-left: 6px solid #3bb4c1;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+}
+
 .result-eval {
   font-size: 17px;
   font-weight: 600;
   margin: 6px 0 2px;
 }
 .eval-correct {
-  color: #059669; /* green */
+  color: #059669;
 }
 .eval-intuitive {
-  color: #ea580c; /* orange */
+  color: #ea580c;
 }
 .eval-other {
-  color: #b91c1c; /* red */
+  color: #b91c1c;
 }
 
-/* 문항 정답률 */
 .item-stats {
   font-size: 15px;
   color: #567;
 }
 
-/* 조언 박스 */
 .advice-block p {
   font-size: 18px;
   color: #355;
   line-height: 1.5;
 }
 
-/* 하이라이트 라벨 */
-.highlight {
-  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
-  padding: 3px 8px;
-  border-radius: 6px;
-  color: white;
-  font-weight: 600;
-}
-
-/* 홈 버튼 */
 #btn-home {
   position: fixed;
   right: 50px;
   bottom: 50px;
-
   padding: 12px 22px;
-
   background: linear-gradient(90deg, #3bb4c1, #40e0d0);
   color: white;
+  border: none;
   font-size: 16px;
   font-weight: 600;
-
-  border: none;
   border-radius: 14px;
   cursor: pointer;
-
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
   transition: all 0.25s ease;
   z-index: 999;
@@ -131,50 +138,4 @@ h3 {
 #btn-home:active {
   transform: translateY(0);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
-}
-
-/* 전체 섹션 박스 */
-.about {
-  background: white;
-  padding: 28px 34px;
-  margin: 40px auto;
-  max-width: 900px;
-
-  border-radius: 18px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-
-  border-left: 6px solid #3bb4c1; /* MindMap의 메인 포인트 컬러 */
-}
-
-/* 제목 */
-.about h2 {
-  font-size: 30px;
-  color: #174a5b;
-  font-weight: 700;
-  margin-bottom: 18px;
-}
-
-/* 본문 전체 스타일 */
-.about p {
-  font-size: 18px;
-  line-height: 1.75;
-  color: #355; /* 자연스러운 남색 계열 */
-  letter-spacing: -0.2px;
-
-  margin: 0;
-  padding: 0;
-}
-
-/* 본문 중 강조(굵은 글씨) */
-.about p strong {
-  color: #174a5b;
-  font-weight: 700;
-  background: linear-gradient(90deg, #e4f7f5 0%, #d8f6f3 100%);
-  padding: 2px 4px;
-  border-radius: 6px;
-}
-
-/* 문단 내 줄 간격 보정 */
-.about p br {
-  line-height: 180%;
 }

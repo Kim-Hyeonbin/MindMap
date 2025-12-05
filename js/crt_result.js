@@ -1,152 +1,194 @@
-window.onload = () => {
-  // 세션 스토리지에서 사용자 입력 가져오기
-  const raw = sessionStorage.getItem("crtResult");
-  const result = JSON.parse(raw);
+// 파이 차트 부드럽게 애니메이션
+function animatePie(chart, targetData, duration = 1200) {
+  let start = null;
 
+  function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+
+    chart.data.datasets[0].data = targetData.map((v) => v * p);
+    chart.update();
+
+    if (p < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
+window.onload = () => {
+  const raw = sessionStorage.getItem("crtResult");
+  const result = raw ? JSON.parse(raw) : null;
   const container = document.getElementById("result-container");
 
   if (!result) {
-    container.innerHTML = "<p>결과가 없습니다. 다시 검사를 진행해주세요.</p>";
+    container.innerHTML = "<p>결과가 없습니다.</p>";
     return;
   }
 
-  // JSON에서 문항 정보 불러오기
   fetch("../assets/crt_resource.json")
     .then((res) => res.json())
     .then((data) => {
       const questions = data.question;
       const globalStats = data.global_stats["정답률"];
 
-      // 총 정답 개수 표시
-      const totalScore = result.correct.length;
+      const correctCount = result.correct.length;
+      const intuitiveCount = result.intuitive_wrong.length;
+      const otherCount =
+        result.other?.length ??
+        questions.length - correctCount - intuitiveCount;
+
+      const totalScore = correctCount;
       const maxScore = questions.length;
 
       container.innerHTML += `
         <h2>총 정답: ${totalScore} / ${maxScore}</h2>
       `;
 
-      //  사고 유형 분류 (점수 + 직관적 오답 기반)
-
-      const correctCount = result.correct.length;
-      const intuitiveCount = result.intuitive_wrong.length;
-      const otherCount = result.other
-        ? result.other.length
-        : maxScore - correctCount - intuitiveCount;
-
-      let thinkerType = "";
-      let thinkerDesc = "";
-
-      if (correctCount === maxScore) {
-        // 3개 모두 정답
-        thinkerType = "Analytical Thinker (숙고형 사고자)";
-        thinkerDesc =
-          "직관에 바로 반응하기보다는, 잠시 멈추어 사고한 뒤 결론에 도달하는 경향이 강합니다.";
-      } else if (correctCount >= 2) {
-        // 정답이 2개 이상이지만, 일부 직관/오답 섞임
-        thinkerType = "Mixed Thinker (혼합형 사고자)";
-        thinkerDesc =
-          "전반적으로 숙고적 사고가 잘 작동하지만, 일부 상황에서는 직관이나 추측이 개입하는 양상이 보입니다.";
-      } else if (correctCount <= 1) {
-        // 정답이 0~1개인 경우, 오답의 성격을 추가로 본다
-        if (intuitiveCount > otherCount) {
-          // 직관적 오답이 더 많음
-          thinkerType = "Intuitive-biased Thinker (직관 편향형)";
-          thinkerDesc =
-            "첫 느낌이 강하게 작동하며, 빠른 판단이 우선하는 경향이 있습니다. 계산보다는 즉각적인 인상이 먼저 반응합니다.";
-        } else if (otherCount > intuitiveCount) {
-          // 직관적 오답도 아니고, 정답과도 거리가 있는 답이 많음
-          thinkerType = "Guess-driven Thinker (추측형 사고자)";
-          thinkerDesc =
-            "직관적인 계산 패턴보다는, 답을 확신하지 못한 채 추측에 기대는 경향이 나타납니다. 문제 구조를 파악하기 전에 답을 선택했을 가능성이 높습니다.";
-        } else {
-          // 직관적 오답과 기타 오답이 비슷하게 섞인 경우
-          thinkerType = "Unstable Mixed Thinker (불안정 혼합형)";
-          thinkerDesc =
-            "직관과 추측이 섞여 나타나며, 어느 한 쪽도 일관되게 우세하지는 않습니다. 문제마다 전혀 다른 패턴이 드러납니다.";
-        }
-      }
-
+      // 전체 분포 섹션 HTML 생성
       container.innerHTML += `
-        <section class="analysis-block">
-          <h3>🧠 사고 유형 분석</h3>
-          <p><strong>${thinkerType}</strong></p>
-          <p>${thinkerDesc}</p>
-          <hr/>
+        <section class="result-block" id="dist-block">
+          <h3>📊 전체 분포와 비교</h3>
+
+          <div style="width:240px; height:240px; margin:0 auto;">
+            <canvas id="overallPie"></canvas>
+          </div>
+
+          <p class="distribution-text" style="margin-top:10px;">
+            · 0개 정답: ${globalStats["0"]}%<br>
+            · 1개 정답: ${globalStats["1"]}%<br>
+            · 2개 정답: ${globalStats["2"]}%<br>
+            · 3개 정답: ${globalStats["3"]}%<br><br>
+            <strong>→ 당신은 ${totalScore}점 그룹에 속합니다.</strong>
+          </p>
         </section>
       `;
 
-      // 전체 분포에서의 위치 (global_stats 활용)
+      // 전체 분포 파이 차트 생성 (DOM 생성 이후)
+      // 약간 딜레이를 줘서 DOM 안정화
+      setTimeout(() => {
+        const ctx = document.getElementById("overallPie");
+        const overallPie = new Chart(ctx, {
+          type: "pie",
+          data: {
+            labels: ["0개 정답", "1개 정답", "2개 정답", "3개 정답"],
+            datasets: [
+              {
+                data: [0, 0, 0, 0],
+                backgroundColor: ["#3bb4c1", "#2d8f9a", "#ffb74d", "#ef5350"],
+                borderColor: ["#3bb4c1", "#2d8f9a", "#ffb74d", "#ef5350"],
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: "bottom" } },
+          },
+        });
 
-      const distributionText = `
-        <p>전체 집단 기준:</p>
-        <p>· 0개 정답: ${globalStats["0"]}%</p>
-        <p>· 1개 정답: ${globalStats["1"]}%</p>
-        <p>· 2개 정답: ${globalStats["2"]}%</p>
-        <p>· 3개 정답: ${globalStats["3"]}%</p>
-      `;
+        animatePie(overallPie, [17, 17.5, 24.3, 41.3]);
+      }, 30);
 
-      container.innerHTML += `
-        <section class="distribution-block">
-          <h3>📊 전체 분포와의 비교</h3>
-          ${distributionText}
-          <p><strong>→ 당신은 이 분포에서 ${totalScore}점 그룹에 속합니다.</strong></p>
-          <hr/>
-        </section>
-      `;
-
-      // 문항별 상세 결과 표시
-
+      // 문항별 결과 렌더링 + 각 항목 파이 차트 생성
       container.innerHTML += `<h3>📝 문항별 결과</h3>`;
 
       questions.forEach((q) => {
-        let status = "";
+        let statusClass = "";
+        let statusText = "";
 
         if (result.correct.includes(q.id)) {
-          status = "⭕ 정답";
+          statusClass = "eval-correct";
+          statusText = "⭕ 정답";
         } else if (result.intuitive_wrong.includes(q.id)) {
-          status = "❌ 직관적 오답";
+          statusClass = "eval-intuitive";
+          statusText = "❌ 직관적인 오답";
         } else {
-          status = "❌ 오답";
+          statusClass = "eval-other";
+          statusText = "❌ 오답";
         }
 
         container.innerHTML += `
           <div class="result-item">
             <p><strong>${q.id}. ${q.text}</strong></p>
             <p>정답: ${q["정답"]}</p>
-            <p>평가: ${status}</p>
-            <p>문항 정답률: ${q.stats["숙고적"]}%</p>
-            <hr/>
+            <p class="result-eval ${statusClass}">${statusText}</p>
+
+            <div style="width:180px; height:180px; margin:0 auto;">
+              <canvas id="itemPie-${q.id}"></canvas>
+            </div>
+
+            <p class="item-stats">
+              정답률: ${q.stats["숙고적"]}%<br>
+              직관적 오답률: ${q.stats["직관적"]}%<br>
+              그 외 오답률: ${q.stats["그 외"]}%
+            </p>
           </div>
         `;
+
+        setTimeout(() => {
+          const itemCtx = document.getElementById(`itemPie-${q.id}`);
+          const itemPie = new Chart(itemCtx, {
+            type: "pie",
+            data: {
+              labels: ["정답", "직관적인 오답", "그 외 오답"],
+              datasets: [
+                {
+                  data: [0, 0, 0],
+                  backgroundColor: [
+                    "rgba(64, 224, 208, .92)",
+                    "rgba(255, 159, 64, .92)",
+                    "rgba(153, 102, 255, .92)",
+                  ],
+                  borderColor: [
+                    "rgba(64, 224, 208, 1)",
+                    "rgba(255, 159, 64, 1)",
+                    "rgba(153, 102, 255, 1)",
+                  ],
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { position: "bottom" } },
+            },
+          });
+
+          animatePie(itemPie, [
+            q.stats["숙고적"],
+            q.stats["직관적"],
+            q.stats["그 외"],
+          ]);
+        }, 50);
       });
 
-      // 간단한 조언 (점수 기반)
-
+      // 짧은 조언 제공
       let advice = "";
-
       if (totalScore === 3) {
         advice =
-          "당신의 사고는 차분하게 조율되어 있으며, 복잡한 상황에서도 쉽게 흔들리지 않습니다.";
+          "당신의 사고는 매우 안정적으로 구조를 잡아냅니다. 중요한 판단에서도 균형 잡힌 시야가 유지됩니다.";
       } else if (totalScore === 2) {
         advice =
-          "때로는 직관을 믿고, 때로는 멈추어 생각하는 방식이 균형을 이룹니다. 이 균형은 큰 장점입니다.";
+          "직관과 숙고가 조화를 이루는 편이며, 상황 대응력에서 강점을 보입니다.";
       } else if (totalScore === 1) {
         advice =
-          "빠른 판단이 강점이지만, 중요한 선택일수록 한 번 더 생각하는 습관이 많은 것을 바꿉니다.";
+          "첫 느낌이 강하게 작용하기 때문에 중요한 선택에서는 ‘잠시 멈춤’이 큰 차이를 만듭니다.";
       } else {
         advice =
-          "직관은 샘물처럼 빠르지만, 판단은 때로 무거운 발걸음을 필요로 합니다. '잠시 멈춤'이 사고 정확성을 끌어올려 줍니다.";
+          "빠른 판단이 장점이지만, 사고 전환을 의식적으로 훈련하면 판단 정확도가 더 안정됩니다.";
       }
 
       container.innerHTML += `
-        <section class="advice-block">
+        <section class="result-block advice-block">
           <h3>💡 짧은 조언</h3>
           <p>${advice}</p>
         </section>
       `;
     });
 
-  document.getElementById("btn-home").addEventListener("click", () => {
-    window.location.href = "https://kim-hyeonbin.github.io/MindMap/index.html";
-  });
+  document.getElementById("btn-home").onclick = () => {
+    window.location.href = "../index.html";
+  };
 };
