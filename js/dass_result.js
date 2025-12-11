@@ -117,6 +117,11 @@ window.onload = () => {
         else if (pct < 83) level = "약간 높음";
         else level = "높음";
 
+        // 마지막 블록에 사용할 레벨 변수
+        if (key === "D") D_level = level;
+        if (key === "A") A_level = level;
+        if (key === "S") S_level = level;
+
         // 결과 고지 블록
         const block = document.createElement("div");
         block.className = "factor-block";
@@ -202,6 +207,60 @@ window.onload = () => {
 
         animateSingleChart(dassChart, [raw, mean]);
       });
+
+      // 정서적 안정성 최종 평가(요약) 블록 추가
+      const levels = [D_level, A_level, S_level];
+
+      const highCount = levels.filter((l) => l === "높음").length;
+      const midCount = levels.filter((l) => l === "약간 높음").length;
+      const lowCount = levels.filter(
+        (l) => l === "낮음" || l === "약간 낮음"
+      ).length;
+      const normalCount = levels.filter((l) => l === "보통").length;
+
+      let overall = "";
+      let comment = "";
+
+      if (highCount >= 2) {
+        overall = "정서 안정성 매우 낮음";
+        comment =
+          "두 가지 이상 영역에서 높은 수준의 정서적 부담이 나타납니다.<br />전문가 상담이나 진료를 고려해도 좋습니다.";
+      } else if (highCount === 1 && midCount >= 1) {
+        overall = "정서 안정성 낮음";
+        comment =
+          "복수 영역에서 스트레스 반응이 높습니다.<br />충분한 휴식과 환경 조절이 필요합니다.";
+      } else if (midCount >= 2) {
+        overall = "정서 안정성 낮은 편";
+        comment =
+          "여러 영역에서 중간 이상 수준의 긴장도가 감지됩니다.<br />일상 속 여유를 의도적으로 확보해보세요.";
+      } else if (highCount === 1 && midCount === 0) {
+        overall = "정상 범주 내 불안정";
+        comment =
+          "특정 영역에서만 높은 정서적 부담이 보입니다.<br />평소보다 휴식 루틴을 강화하는 것이 좋습니다.";
+      } else if (normalCount === 3) {
+        overall = "평범한 편";
+        comment = "전반적으로 평균 범위 안에 있습니다.";
+      } else if (lowCount >= 2) {
+        overall = "정서적으로 건강";
+        comment =
+          "여러 영역에서 낮은 긴장도를 보입니다.<br />현재 페이스를 자연스럽게 유지하세요.";
+      } else {
+        overall = "평균적인 상태";
+        comment = "대체로 무난한 정서 흐름입니다.";
+      }
+
+      const summaryBlock = document.createElement("div");
+      summaryBlock.className = "factor-block";
+
+      summaryBlock.innerHTML = `
+        <div class="factor-title">정서적 안정성 요약 👀</div>
+        <div class="factor-comment">
+          <b>${overall}</b><br>
+          ${comment}
+        </div>
+      `;
+
+      container.appendChild(summaryBlock);
     });
 
   document.getElementById("btn-home").onclick = () => {
