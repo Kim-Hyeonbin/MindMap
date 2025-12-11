@@ -2,17 +2,19 @@
 body {
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
   margin: 0;
-  padding: 20px;
   background-color: #f7faf9;
   color: #174a5b;
   text-align: center;
 }
 
-h1,
-h2,
-h3 {
-  color: #174a5b;
-  margin-bottom: 1rem;
+h1 {
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 1.8rem;
+  margin: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 문항 전체 컨테이너 */

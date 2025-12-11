@@ -2,7 +2,7 @@
 body {
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
   margin: 0;
-  padding: 20px;
+
   background-color: #f7faf9;
   color: #174a5b;
   line-height: 1.55;
@@ -10,11 +10,18 @@ body {
 
 /* 제목 */
 h1 {
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 32px;
-  font-weight: 700;
-  color: #174a5b;
+
+  /* 타이틀 아래 여백 확보 */
+  padding: 1.5rem 1rem 2rem 1rem;
+  /* top 1.5rem, side 1rem, bottom 2.5rem */
+
+  font-size: 1.8rem;
+  margin: 0;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* 전체 컨테이너 */
@@ -28,6 +35,7 @@ h1 {
   background: white;
   padding: 22px 20px;
   border-radius: 14px;
+  margin-top: 20px;
   margin-bottom: 26px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
