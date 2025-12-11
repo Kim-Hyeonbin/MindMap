@@ -1,46 +1,58 @@
-/* 전체 폰트 및 기본 설정 */
 body {
   font-family: "Pretendard", "Noto Sans KR", sans-serif;
   font-size: 18px;
   margin: 0;
-  background-color: #f7faf9;
+  padding: 0;
+  background: #f7faf9;
   color: #174a5b;
-  text-align: center;
 }
 
-/* 헤더 */
+/* 로고 */
 .main-header {
-  padding: 0.5rem 1rem 1rem 1rem;
   background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
-  color: white;
+  padding: 3rem 2rem;
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  flex-wrap: wrap;
 }
 
 .logo {
-  width: 600px;
+  width: 450px;
   height: auto;
 }
 
-/* 본문 소개 */
-.intro {
-  padding: 2rem 1rem;
+/* about 섹션 */
+.about {
+  max-width: 900px;
+  margin: 3rem auto 0 auto;
+  padding: 2rem 2rem;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
-.about h2 {
+h2 {
   color: #3bb4c1;
-  font-size: 2rem;
+  font-size: 1.9rem;
+  margin-bottom: 2.5;
+  text-align: center;
 }
 
-.about p {
+p {
   line-height: 1.7;
-  margin-top: 1rem;
-  color: #333;
+  color: #345;
+  text-align: center;
 }
 
 /* 버튼 섹션 */
 .tests {
   margin-top: 2rem;
 }
-
 .button-container {
   display: flex;
   justify-content: center;
@@ -48,7 +60,6 @@ body {
   gap: 1.5rem;
   margin-top: 1rem;
 }
-
 button {
   border: none;
   border-radius: 10px;
@@ -60,7 +71,6 @@ button {
   color: #ffffff;
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
-
 button:hover {
   background-color: #2f9ca6;
   transform: translateY(-2px);
