@@ -146,3 +146,16 @@ h3 {
   transform: translateY(0);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
 }
+
+.result-disclaimer {
+  max-width: 860px;
+  margin: 5px auto 0;
+  padding: 20px 26px;
+  background: #eef7f6;
+  border-radius: 14px;
+  border-left: 6px solid #3bb4c1;
+  font-size: 14px;
+  color: #456;
+  line-height: 1.55;
+  text-align: center;
+}

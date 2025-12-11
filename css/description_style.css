@@ -112,23 +112,3 @@ li {
 .btn-secondary:hover {
   background: #d3e7e5;
 }
-
-@media (max-width: 600px) {
-  main {
-    padding: 1.4rem 1rem 3rem 1rem;
-  }
-
-  section {
-    padding: 1.1rem 1.1rem;
-  }
-
-  .button-row {
-    flex-direction: column;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    width: 100%;
-    text-align: center;
-  }
-}
