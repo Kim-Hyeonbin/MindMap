@@ -1,3 +1,14 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Pretendard", "Noto Sans KR", sans-serif;
+  background: #f7faf9;
+  color: #174a5b;
+}
 /* 전체 결과 블록 */
 .factor-block {
   background: white;
@@ -5,6 +16,15 @@
   margin-bottom: 28px;
   border-radius: 14px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.result-header {
+  width: 100%;
+  box-sizing: border-box; /* padding 적용해도 폭 넘침 방지 */
+  text-align: center;
+  padding: 20px 0 12px;
+  background: linear-gradient(180deg, #3bb4c1 0%, #40e0d0 100%);
+  color: white;
 }
 
 /* 결과 전체 컨테이너 */

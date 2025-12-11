@@ -56,15 +56,15 @@ body {
 }
 
 button {
-  background-color: #3bb4c1;
-  color: white;
   border: none;
   border-radius: 10px;
   padding: 1rem 2rem;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #3bb4c1, #40e0d0);
+  color: #ffffff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
 }
 
 button:hover {
