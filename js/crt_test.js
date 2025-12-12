@@ -78,5 +78,12 @@ window.onload = function () {
         // 결과 페이지로 이동
         window.location.href = "../results/crt_result.html";
       });
+    })
+    .catch(() => {
+      container.innerHTML =
+        "<p>검사 데이터를 불러오지 못했습니다.<br>홈 화면으로 이동합니다.</p>";
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1500);
     });
 };
