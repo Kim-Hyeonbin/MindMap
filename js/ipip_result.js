@@ -69,9 +69,13 @@ window.onload = () => {
   const data = sessionStorage.getItem("factorScores");
   const container = document.getElementById("result-container");
 
+  // 세션 스토리지로 검사 결과를 전달받지 못한 상황 예외 처리
   if (!data) {
     container.innerHTML =
-      "<p>검사 결과가 없습니다. 다시 검사를 진행해주세요.</p>";
+      "<p>검사 결과가 없습니다.<br>다시 검사를 진행해주세요.<br>홈 화면으로 이동합니다.</p>";
+    setTimeout(() => {
+      window.location.href = "../index.html";
+    }, 1500);
     return;
   }
 
