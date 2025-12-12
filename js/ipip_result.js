@@ -180,10 +180,16 @@ window.onload = () => {
         drawPercentileChart(`pct-${key}`, percentile);
         drawScoreChart(`score-${key}`, yourPos, meanPos);
       }
+    })
+    .catch(() => {
+      container.innerHTML =
+        "<p>데이터를 불러오지 못했습니다.<br>홈 화면으로 이동합니다.</p>";
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1500);
     });
 
   //  퍼센트 가로 바 애니메이션
-
   function drawPercentileChart(id, percentile) {
     const el = document.getElementById(id);
     if (!el) return;

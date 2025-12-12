@@ -87,7 +87,12 @@ window.onload = () => {
   const scores = JSON.parse(data);
 
   fetch("../assets/dass_resource.json")
-    .then((res) => res.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("통계 데이터를 불러올 수 없습니다.");
+      }
+      return response.json();
+    })
     .then((json) => {
       const stat = json.statistics;
 
@@ -266,6 +271,13 @@ window.onload = () => {
       `;
 
       container.appendChild(summaryBlock);
+    })
+    .catch(() => {
+      container.innerHTML =
+        "<p>데이터를 불러오지 못했습니다.<br>홈 화면으로 이동합니다.</p>";
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1500);
     });
 
   document.getElementById("btn-home").onclick = () => {

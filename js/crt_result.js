@@ -31,7 +31,12 @@ window.onload = () => {
   }
 
   fetch("../assets/crt_resource.json")
-    .then((res) => res.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("통계 데이터를 불러올 수 없습니다.");
+      }
+      return response.json();
+    })
     .then((data) => {
       const questions = data.question;
       const globalStats = data.global_stats["정답률"];
@@ -191,6 +196,13 @@ window.onload = () => {
           <p>${advice}</p>
         </section>
       `;
+    })
+    .catch(() => {
+      container.innerHTML =
+        "<p>검사 데이터를 불러오지 못했습니다.<br>홈 화면으로 이동합니다.</p>";
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 1500);
     });
 
   document.getElementById("btn-home").onclick = () => {
